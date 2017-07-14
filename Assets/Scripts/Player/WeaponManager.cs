@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour {
 
-	// Use this for initialization
+	public GameObject m_ShootTarget;
+	public PlayerController m_PlayerController;
+
 	void Start () {
-		
+		m_ShootTarget = transform.Find("ShootTarget").gameObject;
+		if(!m_ShootTarget){
+			Debug.LogError("Player needs the gameobject called ShootTarget");
+			Debug.Break();
+		}
+		m_PlayerController = GetComponent<PlayerController>();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-		
+		if(Input.GetMouseButtonDown(0)){
+			Shoot();
+		}
+	}
+
+	private void Shoot(){
+		Debug.Log("bang");
+
 	}
 }

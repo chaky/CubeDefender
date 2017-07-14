@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityStandardAssets.CrossPlatformInput;
-using UnityStandardAssets.Utility;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
