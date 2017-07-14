@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 	
 	[SerializeField] private MouseLook m_MouseLook;
-	private Camera m_CurrentCamera;
+	public Camera m_CurrentCamera;
 	private Camera m_FPCamera;
 	private Camera m_3PCamera;
 	public bool m_use3PCamera;
