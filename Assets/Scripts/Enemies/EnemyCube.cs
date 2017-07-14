@@ -5,9 +5,12 @@ using UnityEngine;
 public class EnemyCube : MonoBehaviour {
 
 	public float m_Speed = 1f;
-	public int m_Life = 50;
+	public float m_Life = 100;
+	private float m_Damage = 0;
+	public TextMesh m_LifeText; 
 	private float m_AdvanceAngle;
 	private float m_AdvanceTimeStart;
+	private Material m_Material;
 	public GameData.EnemyTypes m_Type;
 	public enum States{
 		New, Idle, WaitForObstacle, Advancing, Jumping, Staring
@@ -19,33 +22,41 @@ public class EnemyCube : MonoBehaviour {
 
 	void Start () {
 		CheckObjectRig();
-		m_Cube.GetComponent<Renderer>().material.color = new Color(Random.value, Random.value, Random.value);
+		m_Material = m_Cube.GetComponent<Renderer>().material;
+		m_Material.color = new Color(Random.value, Random.value, Random.value);
 	}
 
 	public void SetType(GameData.EnemyTypes type){
 		m_Type = type;
 		switch(m_Type){
 		case GameData.EnemyTypes.SimpleCube:
-			m_Speed = 1;
+			m_Speed = 2;
+			m_Life = 100;
 			break;
 		case GameData.EnemyTypes.JumpyCube:
-			m_Speed = 0.5f;
+			m_Speed = 1;
+			m_Life = 50;
 			transform.localScale = Vector3.one * 0.5f;
 			AdjustPositionBySize(0.5f);
 			break;
 		case GameData.EnemyTypes.ZigZagCube:
+			m_Speed = 2;
+			m_Life = 100;
 			break;
 		case GameData.EnemyTypes.BigCube:
-			m_Speed = 2;
+			m_Speed = 3;
+			m_Life = 200;
 			transform.localScale = Vector3.one * 4f;
 			AdjustPositionBySize(4f);
 			break;
 		case GameData.EnemyTypes.TitanCube:
-			m_Speed = 0.2f;
+			m_Speed = 4;
+			m_Life = 500;
 			transform.localScale = Vector3.one * 10f;
 			AdjustPositionBySize(10f);
 			break;
 		}
+		m_LifeText.text = m_Life.ToString();
 		m_State = States.Idle;
 	}
 
@@ -62,7 +73,6 @@ public class EnemyCube : MonoBehaviour {
 			StartAdvance();
 			break;
 		case States.Advancing:
-			Debug.Log("advance");
 			float elapsedAdvance = Time.time - m_AdvanceTimeStart;
 			m_AdvanceAngle = Mathf.Lerp(0, 90, elapsedAdvance * (1/m_Speed));
 			if(m_AdvanceAngle >= 90){
@@ -77,7 +87,6 @@ public class EnemyCube : MonoBehaviour {
 	}
 
 	private void StartAdvance(){
-		Debug.Log("Advance!!");
 		m_State = States.Advancing;
 		m_Cube.transform.SetParent(m_Pivot.transform);
 		m_AdvanceTimeStart = Time.time;
@@ -85,7 +94,6 @@ public class EnemyCube : MonoBehaviour {
 
 	public void AdvanceFinished(){
 		m_State = States.Idle;
-		Debug.Log("advanceends");
 		m_Pivot.transform.localEulerAngles = new Vector3(90, 0, 0);
 
 		transform.position = m_Cube.transform.position;
@@ -108,7 +116,19 @@ public class EnemyCube : MonoBehaviour {
 		}
 	}
 
+	public void ApplyDamage(float damage){
+		m_LifeText.text = (m_Life - m_Damage).ToString();
+		m_Damage += damage;
+		Color col = m_Material.color;
+		col.a = (m_Life - m_Damage) / m_Life;
+		m_Material.color = col;
+		if(m_Damage > m_Life){
+			Kill();
+		}
+	}
+
 	public void Kill(){
 		//TODO: create a particle system for explosion, out of this object
+		GameObject.Destroy(gameObject);
 	}
 }

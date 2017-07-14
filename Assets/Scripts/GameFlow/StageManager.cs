@@ -16,6 +16,7 @@ public class StageManager : MonoBehaviour {
 		m_EnemyManager = GetComponent<EnemyManager>();
 		m_TimeCounter = GetComponent<TimeCounter>();
 		PrepareToPlay();
+		//Time.timeScale = 0.1f;
 	}
 
 	void Update(){

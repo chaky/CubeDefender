@@ -9,6 +9,7 @@ public class WeaponManager : MonoBehaviour {
 	public ParticleSystem m_ShootFlare;
 	public PlayerController m_PlayerController;
 	public GameObject m_BulletPrefab;
+	public GameData.WeaponTypes m_CurrentWeapon;
 
 	void Start () {
 		m_ShootTarget = transform.Find("ShootTarget").gameObject;
@@ -39,13 +40,15 @@ public class WeaponManager : MonoBehaviour {
 		Ray ray = new Ray();
 		ray.origin = m_PlayerController.m_CurrentCamera.transform.position;
 		ray.direction = m_PlayerController.m_CurrentCamera.transform.forward;
-		m_ShootTarget.transform.position = ray.GetPoint(50);
+		m_ShootTarget.transform.position = ray.GetPoint(GameData.m_StageRadius);
 		m_WeaponModel.transform.LookAt(m_ShootTarget.transform);
 	}
 
 	private void Shoot(){
-		Debug.Log("bang");
-		GameObject.Instantiate(m_BulletPrefab, m_ShootFlare.transform.position, m_PlayerController.m_CurrentCamera.transform.rotation);
+		GameObject bullet = GameObject.Instantiate(m_BulletPrefab, m_ShootFlare.transform.position, m_PlayerController.m_CurrentCamera.transform.rotation);
+		bullet.GetComponent<Bullet>().m_Thrust = 100;
+		bullet.GetComponent<Bullet>().m_Damage = GameData.m_WeaponDamages[(int)m_CurrentWeapon];
+		bullet.GetComponent<Bullet>().Shoot();
 		m_ShootFlare.Play();
 	}
 }

@@ -15,6 +15,10 @@ public static class GameData{
 	public enum WeaponTypes{
 		MachineGun, Sniper, ShotGun
 	}
+	public static int[] m_WeaponDamages = {20, 60, 40}; 
+
+	public static float m_StageRadius = 30;
+
 	private static string gameSavedDataFile = "gameSavedData";
 	private static string gameConfigFile = "gameConfig";
 }

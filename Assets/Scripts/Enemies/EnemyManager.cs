@@ -32,7 +32,7 @@ public class EnemyManager : MonoBehaviour {
 		Ray ray = new Ray();
 		ray.origin = Vector3.zero;
 		ray.direction = new Vector3(Random.value - 0.5f, 0, Random.value - 0.5f);
-		Vector3 enemySpawnPosition = ray.GetPoint(50);
+		Vector3 enemySpawnPosition = ray.GetPoint(GameData.m_StageRadius);
 		newEnemy.transform.position = enemySpawnPosition + Vector3.up * 0.5f;
 		newEnemy.transform.LookAt(Vector3.zero + Vector3.up * 0.5f);
 		newEnemy.GetComponent<EnemyCube>().SetType(GetNextEnemyType());
