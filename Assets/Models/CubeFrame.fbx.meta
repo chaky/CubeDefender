@@ -1,34 +1,15 @@
 fileFormatVersion: 2
-guid: d4ee41e7caae6b243ba3d66f6b06f67c
-timeCreated: 1500044575
+guid: eeb69b9ab401cef4a9816350d66948a7
+timeCreated: 1500045955
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: MachineGun
-    100002: //RootNode
-    100004: Mountains
-    100006: Cube
-    100008: CubeFrame
-    400000: MachineGun
-    400002: //RootNode
-    400004: Mountains
-    400006: Cube
-    400008: CubeFrame
-    2300000: MachineGun
-    2300002: Mountains
-    2300004: Cube
-    2300006: CubeFrame
-    3300000: MachineGun
-    3300002: Mountains
-    3300004: Cube
-    3300006: CubeFrame
-    4300000: Mountains
-    4300002: MachineGun
-    4300004: CubeFrame
-    4300006: Cube
-    7400000: Default Take
-    9500000: //RootNode
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: CubeFrame
   materials:
     importMaterials: 1
     materialName: 0
@@ -55,7 +36,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.5
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -93,7 +74,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

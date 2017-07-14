@@ -32,35 +32,36 @@ public class EnemyCube : MonoBehaviour {
 		case GameData.EnemyTypes.SimpleCube:
 			m_Speed = 2;
 			m_Life = 100;
+			ScaleProperly(2);
 			break;
 		case GameData.EnemyTypes.JumpyCube:
-			m_Speed = 1;
+			m_Speed = 0.5f;
 			m_Life = 50;
 			transform.localScale = Vector3.one * 0.5f;
-			AdjustPositionBySize(0.5f);
+			ScaleProperly(1);
 			break;
 		case GameData.EnemyTypes.ZigZagCube:
 			m_Speed = 2;
 			m_Life = 100;
+			ScaleProperly(3);
 			break;
 		case GameData.EnemyTypes.BigCube:
 			m_Speed = 3;
 			m_Life = 200;
-			transform.localScale = Vector3.one * 4f;
-			AdjustPositionBySize(4f);
+			ScaleProperly(6);
 			break;
 		case GameData.EnemyTypes.TitanCube:
 			m_Speed = 4;
 			m_Life = 500;
-			transform.localScale = Vector3.one * 10f;
-			AdjustPositionBySize(10f);
+			ScaleProperly(10);
 			break;
 		}
 		m_LifeText.text = m_Life.ToString();
 		m_State = States.Idle;
 	}
 
-	private void AdjustPositionBySize(float size){
+	private void ScaleProperly(float size){
+		transform.localScale = Vector3.one * size;
 		Vector3 pos = transform.localPosition;
 		pos.y = size / 2;
 		transform.localPosition = pos;
